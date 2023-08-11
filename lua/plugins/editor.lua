@@ -9,7 +9,36 @@ return {
 		},
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>e", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
+			{
+				"<leader>fe",
+				function()
+					require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+				end,
+				desc = "Explorer NeoTree (root dir)",
+				silent = true,
+			},
+			{
+				"<leader>fE",
+				function()
+					require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+				end,
+				desc = "Explorer NeoTree (cwd)",
+				silent = true,
+			},
+			{
+				"<leader>e",
+				":Neotree toggle float<CR>",
+				desc = "Float File Explorer",
+				remap = true,
+				silent = true,
+			},
+			{
+				"<leader>E",
+				"<leader>fE",
+				desc = "Explorer NeoTree (cwd)",
+				remap = true,
+				silent = true,
+			},
 		},
 		config = function()
 			require("neo-tree").setup({
@@ -68,12 +97,15 @@ return {
 					},
 				},
 				filesystem = {
-					use_libuv_file_watcher = true,
 					filtered_items = {
 						hide_by_name = {
 							"node_modules",
 						},
 					},
+					follow_current_file = {
+						enabled = true,
+					},
+					use_libuv_file_watcher = true,
 				},
 				popup_border_style = "rounded",
 				sort_case_insensitive = true,
