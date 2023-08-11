@@ -94,10 +94,10 @@ return {
 			vim.cmd("highlight NormalNC guibg=none guifg=none")
 
 			-- Change neotree background colors
-			vim.cmd("highlight NeoTreeNormal guibg=#1d2021 guifg=none")
-			vim.cmd("highlight NeoTreeFloatNormal guibg=#141617 guifg=#1d2021")
-			vim.cmd("highlight NeoTreeFloatBorder guibg=#1d2021 guifg=#958272")
-			vim.cmd("highlight NeoTreeEndOfBuffer guibg=#1d2021 guifg=none") -- 1d2021
+			vim.cmd("highlight NeoTreeNormal guibg=none guifg=none")
+			vim.cmd("highlight NeoTreeFloatNormal guibg=none guifg=none")
+			vim.cmd("highlight NeoTreeFloatBorder guibg=none guifg=none")
+			vim.cmd("highlight NeoTreeEndOfBuffer guibg=none guifg=none") -- 1d2021
 		end,
 	},
 }
