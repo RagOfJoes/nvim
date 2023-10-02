@@ -52,7 +52,6 @@ return {
 				[[ ⣿⢟⣠⣾⣦⣠⣤⣤⡀⠀⠁⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿ ]],
 			}
 
-			-- opts.section.header.val = vim.split(logo, "\n", { trimpempty = true })
 			opts.section.header.val = logo
 		end,
 	},
@@ -76,15 +75,18 @@ return {
 					fg = colors.fg,
 				},
 				close_button_selected = {
-					fg = { attribute = "fg", highlight = "StatusLineNonText" },
+					fg = {
+						attribute = "fg",
+						highlight = "StatusLineNonText",
+					},
 				},
 				duplicate = {
-					fg = colors.fg,
 					bg = "",
+					fg = colors.fg,
 				},
 				duplicate_visible = {
-					fg = colors.fg,
 					bg = "",
+					fg = colors.fg,
 				},
 				fill = {
 					bg = "",
@@ -96,8 +98,8 @@ return {
 					bg = "",
 				},
 				offset_separator = {
-					fg = colors.bg,
 					bg = "",
+					fg = colors.bg,
 				},
 				tab = {
 					bg = "",
@@ -110,21 +112,21 @@ return {
 					bg = "",
 				},
 				tab_separator_selected = {
-					fg = colors.bg,
 					bg = "",
+					fg = colors.bg,
 					sp = colors.fg,
 				},
 				separator = {
-					fg = colors.bg,
 					bg = "",
+					fg = colors.bg,
 				},
 				separator_selected = {
-					fg = colors.bg,
 					bg = "",
+					fg = colors.bg,
 				},
 				separator_visible = {
-					fg = colors.bg,
 					bg = "",
+					fg = colors.bg,
 				},
 			},
 			options = {
@@ -154,7 +156,9 @@ return {
 						text_align = "left",
 					},
 				},
+				show_buffer_close_icons = false,
 				show_close_icon = false,
+				show_tab_indicators = false,
 				tab_size = 0,
 			},
 		},
@@ -218,9 +222,8 @@ return {
 			},
 			sections = {
 				lualine_a = {},
-				lualine_b = { "branch" },
+				lualine_b = {},
 				lualine_c = {
-					-- "filename",
 					{
 						"filetype",
 						icon_only = true,
@@ -244,8 +247,26 @@ return {
 						sources = { "nvim_lsp" },
 						symbols = { error = " ", info = " ", warn = " " },
 					},
+					{
+						"diff",
+						source = function()
+							---@diagnostic disable-next-line: undefined-field
+							local gitsigns = vim.b.gitsigns_status_dict
+
+							if gitsigns then
+								return {
+									added = gitsigns.added,
+									modified = gitsigns.changed,
+									removed = gitsigns.removed,
+								}
+							end
+						end,
+					},
+					{ "searchcount" },
 				},
-				lualine_x = { "encoding" },
+				lualine_x = {
+					{ "b:gitsigns_head", icon = "" },
+				},
 				lualine_y = { "progress" },
 				lualine_z = {
 					function()
@@ -274,7 +295,7 @@ return {
 					---@type NoiceViewOptions
 					opts = {
 						win_options = {
-							winblend = 15,
+							winblend = 10,
 							winhighlight = {
 								Normal = "NormalFloat",
 								FloatBorder = "FloatBorder",

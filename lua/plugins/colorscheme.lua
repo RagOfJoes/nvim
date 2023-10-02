@@ -83,10 +83,35 @@ return {
 		enabled = true,
 		priority = 1000,
 		config = function()
-			vim.o.background = "dark"
-			vim.g.gruvbox_material_background = "hard"
+			-- vim.o.background = "dark"
+			-- vim.g.gruvbox_material_background = "hard"
+			--
+			-- vim.cmd.colorscheme("gruvbox-material")
+			--
+			-- -- Change the background color of floating windows and borders.
+			-- vim.cmd("highlight NormalFloat guibg=none guifg=none")
+			-- vim.cmd("highlight FloatBorder guibg=none guifg=#76787d")
+			-- vim.cmd("highlight NormalNC guibg=none guifg=none")
+			--
+			-- -- Change neotree background colors
+			-- vim.cmd("highlight NeoTreeNormal guibg=none guifg=none")
+			-- vim.cmd("highlight NeoTreeFloatNormal guibg=none guifg=none")
+			-- vim.cmd("highlight NeoTreeFloatBorder guibg=none guifg=none")
+			-- vim.cmd("highlight NeoTreeEndOfBuffer guibg=none guifg=none") -- 1d2021
+		end,
+	},
 
-			vim.cmd.colorscheme("gruvbox-material")
+	{
+		"sainnhe/everforest",
+		config = function()
+			vim.g.everforest_background = "hard"
+			vim.g.everforest_enable_italic = 0
+			vim.g.everforest_float_style = "dim"
+			vim.g.everforest_ui_contrast = "high"
+			vim.o.background = "dark"
+
+			vim.g.everforest_better_performance = 1
+			vim.cmd("colorscheme everforest")
 
 			-- Change the background color of floating windows and borders.
 			vim.cmd("highlight NormalFloat guibg=none guifg=none")
@@ -97,7 +122,7 @@ return {
 			vim.cmd("highlight NeoTreeNormal guibg=none guifg=none")
 			vim.cmd("highlight NeoTreeFloatNormal guibg=none guifg=none")
 			vim.cmd("highlight NeoTreeFloatBorder guibg=none guifg=none")
-			vim.cmd("highlight NeoTreeEndOfBuffer guibg=none guifg=none") -- 1d2021
+			vim.cmd("highlight NeoTreeEndOfBuffer guibg=none guifg=none")
 		end,
 	},
 }
