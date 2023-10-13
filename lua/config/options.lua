@@ -1,4 +1,5 @@
 vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.conceallevel = 0
 vim.opt.fileencoding = "utf-8"
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua

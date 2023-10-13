@@ -83,7 +83,7 @@ return {
 						end
 					end
 
-					require("lazyvim.util").on_attach(function(client, buffer)
+					require("lazyvim.util").lsp.on_attach(function(client, buffer)
 						if client.name == "taplo" then
 							vim.keymap.set("n", "K", show_documentation, { buffer = buffer })
 						end

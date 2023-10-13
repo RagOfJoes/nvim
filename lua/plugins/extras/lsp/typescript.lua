@@ -54,7 +54,6 @@ return {
 		},
 		opts = {
 			servers = {
-				---@type lspconfig.options.eslint
 				eslint = {
 					capabilities = {
 						documentFormattingProvider = true,
@@ -89,6 +88,21 @@ return {
 					},
 				},
 				tsserver = {
+					keys = {
+						{
+							"<leader>co",
+							function()
+								vim.lsp.buf.code_action({
+									apply = true,
+									context = {
+										only = { "source.organizeImports.ts" },
+										diagnostics = {},
+									},
+								})
+							end,
+							desc = "Organize Imports",
+						},
+					},
 					settings = {
 						typescript = {
 							format = {
@@ -112,33 +126,37 @@ return {
 			},
 			setup = {
 				eslint = function()
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						callback = function(event)
-							local client = vim.lsp.get_active_clients({ bufnr = event.buf, name = "eslint" })[1]
+					local function get_client(buf)
+						return require("lazyvim.util").lsp.get_clients({ name = "eslint", bufnr = buf })[1]
+					end
+
+					local formatter = require("lazyvim.util").lsp.formatter({
+						filter = "eslint",
+						name = "eslint: lsp",
+						primary = false,
+						priority = 200,
+					})
+
+					-- Use EslintFixAll on Neovim < 0.10.0
+					if not pcall(require, "vim.lsp._dynamic") then
+						formatter.name = "eslint: EslintFixAll"
+						formatter.sources = function(buf)
+							local client = get_client(buf)
+							return client and { "eslint" } or {}
+						end
+						formatter.format = function(buf)
+							local client = get_client(buf)
 							if client then
-								local diag = vim.diagnostic.get(event.buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+								local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
 								if #diag > 0 then
 									vim.cmd("EslintFixAll")
 								end
 							end
-						end,
-					})
-				end,
-				tsserver = function(_, opts)
-					require("lazyvim.util").on_attach(function(client, buffer)
-						if client.name == "tsserver" then
-              -- stylua: ignore
-              vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
-							vim.keymap.set(
-								"n",
-								"<leader>cR",
-								"<cmd>TypescriptRenameFile<CR>",
-								{ desc = "Rename File", buffer = buffer }
-							)
 						end
-					end)
+					end
 
-					opts.capabilities.documentFormattingProvider = false
+					-- register the formatter with LazyVim
+					require("lazyvim.util").format.register(formatter)
 				end,
 			},
 		},

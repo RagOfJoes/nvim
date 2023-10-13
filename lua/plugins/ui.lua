@@ -2,7 +2,7 @@ local colors = require("config.colors").colors
 
 return {
 	{
-		"goolord/alpha-nvim",
+		"glepnir/dashboard-nvim",
 		opts = function(_, opts)
 			--   8 Face
 			--   local logo = [[
@@ -35,6 +35,9 @@ return {
 
 			-- Gojo
 			local logo = {
+				[[                         ]],
+				[[                         ]],
+				[[                         ]],
 				[[ ⣿⣿⣿⣿⣿⣿⣿⡿⣿⣫⢿⣿⡿⣡⡏⣽⣿⣿⣿⣿⣿⣿⣿ ]],
 				[[ ⣿⣿⣿⣿⣿⣿⣿⡇⣧⡏⢼⣫⣖⣛⣙⣛⡿⢿⣿⣿⣿⣿⣿ ]],
 				[[ ⣿⣿⣿⡿⣻⡭⣭⣅⣹⣷⣿⣿⡯⠽⣛⣻⢿⣐⣪⠭⠭⢿⣿ ]],
@@ -50,9 +53,13 @@ return {
 				[[ ⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠉⠛⠦⠈⠺⢿⣿⣿⣿⣿⣿⣿⣿ ]],
 				[[ ⣿⣿⡿⠁⠀⠀⠀⠀⠄⡀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿ ]],
 				[[ ⣿⢟⣠⣾⣦⣠⣤⣤⡀⠀⠁⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿ ]],
+				[[                         ]],
+				[[                         ]],
+				[[                         ]],
 			}
 
-			opts.section.header.val = logo
+			opts.theme = "doom"
+			opts.config.header = logo
 		end,
 	},
 

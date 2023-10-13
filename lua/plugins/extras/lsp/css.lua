@@ -45,7 +45,6 @@ return {
 		opts = {
 			servers = {
 				cssls = {},
-				--- @type lspconfig.settings.tailwindcss
 				tailwindcss = {
 					filetypes_exclude = { "markdown" },
 					settings = {

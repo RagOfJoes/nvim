@@ -10,6 +10,10 @@ require("lazy").setup({
 	spec = {
 		-- add LazyVim and import its plugins
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
+		-- conform
+		-- { import = "lazyvim.plugins.extras.formatting.conform" },
+		-- none-ls
+		{ import = "lazyvim.plugins.extras.lsp.none-ls" },
 		-- Github Copilot
 		{ import = "lazyvim.plugins.extras.coding.copilot" },
 		-- import/override with your plugins
