@@ -2,7 +2,7 @@ local colors = require("config.colors").colors
 
 return {
 	{
-		"glepnir/dashboard-nvim",
+		"nvimdev/dashboard-nvim",
 		opts = function(_, opts)
 			--   8 Face
 			--   local logo = [[
