@@ -72,46 +72,56 @@ return {
 				theme = theme,
 			},
 			sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = {
+				lualine_a = {
 					{
-						"filetype",
-						icon_only = true,
-						padding = {
-							left = 1,
-							right = 0,
-						},
-						separator = "",
-					},
-					{
-						"filename",
-						path = 1,
-						symbols = {
-							modified = "  ",
-							readonly = "",
-							unnamed = "",
+						"branch",
+						icon = {
+							" ",
+							align = "left",
 						},
 					},
+				},
+				lualine_b = {
 					{
 						"diagnostics",
+						colored = false,
+						sections = { "error", "warn", "info" },
 						sources = { "nvim_lsp" },
-						symbols = { error = " ", info = " ", warn = " " },
+						symbols = { error = " ", info = " ", warn = " " },
 					},
-					{
-						"diff",
-						source = diff_source(),
-					},
+				},
+				lualine_c = {
 					{ "searchcount" },
 				},
 				lualine_x = {
-					{ "b:gitsigns_head", icon = "" },
+					{
+						"diff",
+						colored = false,
+						source = diff_source(),
+						symbols = { added = " ", modified = " ", removed = " " },
+					},
 				},
 				lualine_y = { "progress" },
 				lualine_z = {
-					function()
-						return " " .. os.date("%R")
-					end,
+					{
+						function()
+							if not package.loaded["copilot"] then
+								return " "
+							end
+
+							local ok, clients = pcall(require("lazyvim.util").lsp.get_clients, { name = "copilot", bufnr = 0 })
+							if not ok then
+								return " "
+							end
+
+							if not ok or #clients == 0 then
+								return " Loading..."
+							end
+
+							return " "
+						end,
+						color = { fg = colors.fg },
+					},
 				},
 			},
 			inactive_sections = {
