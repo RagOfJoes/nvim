@@ -84,24 +84,31 @@ return {
 						end
 
 						return {
-							{ text = "    ", fg = colors.fg },
+							{ fg = colors.fg, text = "    " },
+						}
+					end,
+					right = function()
+						return {
+							{ fg = colors.fg, text = "  " .. os.date("%R %p") .. "  " },
 						}
 					end,
 				},
 				indicator = {
-					icon = " ",
+					style = "none",
 				},
 				max_name_length = 25,
 				modified_icon = "",
+
 				offsets = {
 					{
 						filetype = "neo-tree",
 						highlight = "Directory",
-						separator = "|",
+						separator = true,
 						text = "  Project",
 						text_align = "left",
 					},
 				},
+				separator_style = { "", "" },
 				show_buffer_close_icons = false,
 				show_close_icon = false,
 				show_tab_indicators = false,
