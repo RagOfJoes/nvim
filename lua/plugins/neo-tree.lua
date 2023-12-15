@@ -28,8 +28,8 @@ return {
 			},
 			{
 				"<leader>e",
-				":Neotree toggle float<CR>",
-				desc = "Float File Explorer",
+				":Neotree toggle<CR>",
+				desc = "Toggle File Explorer",
 				silent = true,
 			},
 			{
@@ -116,7 +116,9 @@ return {
 				popup_border_style = "rounded",
 				sort_case_insensitive = true,
 				window = {
-					position = "float",
+					-- position = "float",
+					auto_expand_width = false,
+					position = "right",
 					width = 35,
 				},
 			})
