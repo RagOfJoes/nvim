@@ -1,6 +1,7 @@
 return {
 	{
 		"kevinhwang91/nvim-ufo",
+		enabled = false,
 		event = { "InsertEnter" },
 		dependencies = { "kevinhwang91/promise-async" },
 		opts = {
