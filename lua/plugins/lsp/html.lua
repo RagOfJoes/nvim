@@ -1,37 +1,32 @@
 return {
-	-- Add astro to treesitter
+	-- Add html to treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = function(_, opts)
-			local src = { "astro" }
+			local src = { "html" }
 
 			vim.list_extend(opts.ensure_installed, src, 1, #src)
 		end,
 	},
 
-	-- Add astro-language-server to mason
+	-- Add html-lsp to mason
 	{
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
 			local src = {
-				"astro-language-server",
+				"html-lsp",
 			}
 
-			vim.list_extend(opts.ensure_installed, src, 1, #src)
+			-- vim.list_extend(opts.ensure_installed, src, 1, #src)
 		end,
 	},
 
 	-- Correctly setup lspconfig
 	{
 		"neovim/nvim-lspconfig",
-		format = {
-			async = true,
-		},
 		opts = {
-			setup = {
-				astro = function(_, opts)
-					opts.capabilities.documentFormattingProvider = false
-				end,
+			servers = {
+				html = {},
 			},
 		},
 	},

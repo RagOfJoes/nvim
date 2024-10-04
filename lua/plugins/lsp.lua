@@ -1,13 +1,13 @@
 return {
 	-- Language specific extension modules
-	{ import = "plugins.extras.lsp.astro" },
-	{ import = "plugins.extras.lsp.c" },
-	{ import = "plugins.extras.lsp.css" },
-	{ import = "plugins.extras.lsp.go" },
-	{ import = "plugins.extras.lsp.html" },
-	{ import = "plugins.extras.lsp.php" },
-	{ import = "plugins.extras.lsp.rust" },
-	{ import = "plugins.extras.lsp.typescript" },
+	{ import = "plugins.lsp.astro" },
+	{ import = "plugins.lsp.c" },
+	{ import = "plugins.lsp.css" },
+	{ import = "plugins.lsp.go" },
+	{ import = "plugins.lsp.html" },
+	{ import = "plugins.lsp.php" },
+	{ import = "plugins.lsp.rust" },
+	{ import = "plugins.lsp.typescript" },
 	{ import = "lazyvim.plugins.extras.lang.json" },
 
 	{

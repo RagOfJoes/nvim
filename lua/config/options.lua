@@ -15,17 +15,25 @@ vim.opt.tabstop = 2
 vim.opt.title = true
 
 -- Enable fold for nvim-ufo
-vim.opt.foldenable = true
+-- vim.opt.foldenable = true
 -- Set high foldlevel for nvim-ufo
-vim.opt.foldlevel = 99
+-- vim.opt.foldlevel = 99
 -- Start with all code unfolded
-vim.opt.foldlevelstart = 99
+-- vim.opt.foldlevelstart = 99
 -- Show foldcolumn in nvim 0.9
 -- vim.opt.foldcolumn = vim.fn.has("nvim-0.9") == 1 and "1" or nil
 
 vim.opt.list = true
-vim.opt.listchars = { tab = " ", extends = "⟩", precedes = "⟨", trail = "·" }
+vim.opt.listchars = {
+	-- eol = "",
+	extends = "⟩",
+	-- nbsp = "␣",
+	precedes = "⟨",
+	tab = " ",
+	trail = ".",
+}
 vim.opt.showbreak = " "
+-- vim.opt.listchars = { tab = " ", extends = "⟩", precedes = "⟨", trail = "·" }
 
 vim.opt.backup = false
 vim.opt.swapfile = false

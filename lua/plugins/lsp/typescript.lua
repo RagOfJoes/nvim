@@ -1,3 +1,5 @@
+local util = require("lspconfig.util")
+
 return {
 	-- Extend auto completion
 	{
@@ -22,11 +24,11 @@ return {
 		end,
 	},
 
-	-- Add javascript, jsdoc, typescript, and, tsx to treesitter
+	-- Add javascript, jsdoc, typescript, tsx, and vue to treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = function(_, opts)
-			local src = { "javascript", "jsdoc", "typescript", "tsx" }
+			local src = { "javascript", "jsdoc", "typescript", "tsx", "vue" }
 
 			vim.list_extend(opts.ensure_installed, src, 1, #src)
 		end,
@@ -39,9 +41,10 @@ return {
 			local src = {
 				"eslint-lsp",
 				"typescript-language-server",
+				"vue-language-server",
 			}
 
-			vim.list_extend(opts.ensure_installed, src, 1, #src)
+			-- vim.list_extend(opts.ensure_installed, src, 1, #src)
 		end,
 	},
 
@@ -122,6 +125,30 @@ return {
 							completeFunctionCalls = true,
 						},
 					},
+				},
+				volar = {
+					-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+					on_new_config = function(new_config, new_root_dir)
+						-- Global typescript path for pnpm on macOS
+						local global_ts = "~/Library/pnpm/global/5/node_modules/typescript/lib"
+
+						local local_ts = ""
+						local found_ts = ""
+						local function check_dir(path)
+							found_ts = util.path.join(path, "node_modules", "typescript", "lib")
+							if util.path.exists(found_ts) then
+								return path
+							end
+						end
+
+						if util.search_ancestors(new_root_dir, check_dir) then
+							local_ts = found_ts
+						else
+							local_ts = global_ts
+						end
+
+						new_config.init_options.typescript.tsdk = local_ts
+					end,
 				},
 			},
 			setup = {
