@@ -1,3 +1,3 @@
-# NVIM Configuration
+# Neovim configuration
 
-My personal neovim configuration
+Always a WIP.
