@@ -45,7 +45,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'L', 'g_', opts)
 -- Navigate buffers
 vim.keymap.set('n', '<Right>', ':bnext<CR>', opts)
 vim.keymap.set('n', '<Left>', ':bprevious<CR>', opts)
-vim.keymap.set('n', 'bD', ':bd<CR>', opts)
+vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = 'Delete Buffer and Window' })
 
 -- Panes resizing
 vim.keymap.set('n', '+', ':vertical resize +5<CR>')
