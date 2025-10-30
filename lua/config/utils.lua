@@ -1,31 +1,5 @@
 local M = {}
 
-M.telescope_git_or_file = function()
-	local path = vim.fn.expand '%:p:h'
-	local git_dir = vim.fn.finddir('.git', path .. ';')
-	if #git_dir > 0 then
-		require('telescope.builtin').git_files()
-	else
-		require('telescope.builtin').find_files()
-	end
-end
-
-M.toggle_set_color_column = function()
-	if vim.wo.colorcolumn == '' then
-		vim.wo.colorcolumn = '80'
-	else
-		vim.wo.colorcolumn = ''
-	end
-end
-
-M.toggle_cursor_line = function()
-	if vim.wo.cursorline then
-		vim.wo.cursorline = false
-	else
-		vim.wo.cursorline = true
-	end
-end
-
 M.toggle_go_test = function()
 	-- Get the current buffer's file name
 	local current_file = vim.fn.expand '%:p'
@@ -48,6 +22,43 @@ M.toggle_go_test = function()
 			print 'No corresponding test file found'
 		end
 	end
+end
+
+-- Get line numbers for highlighted lines in visual mode
+M.get_highlighted_line_numbers = function()
+	local start_line = vim.fn.line "'<"
+	local end_line = vim.fn.line "'>"
+
+	if start_line == 0 or end_line == 0 then
+		print 'No visual selection found'
+		return
+	end
+
+	-- Ensure start_line is always less than or equal to end_line
+	if start_line > end_line then
+		start_line, end_line = end_line, start_line
+	end
+
+	local line_numbers = {}
+	for i = start_line, end_line do
+		table.insert(line_numbers, i)
+	end
+
+	local result
+	if start_line == end_line then
+		-- Single line: L80
+		result = string.format('L%d', start_line)
+	else
+		-- Multiple lines: L80-85
+		result = string.format('L%d-%d', start_line, end_line)
+	end
+
+	print('Line numbers: ' .. result)
+
+	-- Copy to clipboard
+	vim.fn.setreg('+', result)
+
+	return line_numbers
 end
 
 -- Copy the current file path and line number to the clipboard, use GitHub URL if in a Git repository

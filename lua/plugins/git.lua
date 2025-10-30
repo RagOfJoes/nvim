@@ -1,42 +1,27 @@
 return {
 	{
 		'lewis6991/gitsigns.nvim',
-		lazy = false,
+		lazy = true,
+		event = { 'BufReadPre', 'BufNewFile' },
 		config = function()
 			-- local icons = require('config.icons')
 			require('gitsigns').setup {
-				-- signs = {
-				--   add = {
-				--     hl = "GitSignsAdd",
-				--     text = icons.ui.BoldLineLeft,
-				--     numhl = "GitSignsAddNr",
-				--     linehl = "GitSignsAddLn",
-				--   },
-				--   change = {
-				--     hl = "GitSignsChange",
-				--     text = icons.ui.BoldLineLeft,
-				--     numhl = "GitSignsChangeNr",
-				--     linehl = "GitSignsChangeLn",
-				--   },
-				--   delete = {
-				--     hl = "GitSignsDelete",
-				--     text = icons.ui.TriangleShortArrowRight,
-				--     numhl = "GitSignsDeleteNr",
-				--     linehl = "GitSignsDeleteLn",
-				--   },
-				--   topdelete = {
-				--     hl = "GitSignsDelete",
-				--     text = icons.ui.TriangleShortArrowRight,
-				--     numhl = "GitSignsDeleteNr",
-				--     linehl = "GitSignsDeleteLn",
-				--   },
-				--   changedelete = {
-				--     hl = "GitSignsChange",
-				--     text = icons.ui.BoldLineLeft,
-				--     numhl = "GitSignsChangeNr",
-				--     linehl = "GitSignsChangeLn",
-				--   },
-				-- },
+				signs = {
+					add = { text = '┃' },
+					change = { text = '┃' },
+					delete = { text = '_' },
+					topdelete = { text = '‾' },
+					changedelete = { text = '~' },
+					untracked = { text = '┆' },
+				},
+				signs_staged = {
+					add = { text = '┃' },
+					change = { text = '┃' },
+					delete = { text = '_' },
+					topdelete = { text = '‾' },
+					changedelete = { text = '~' },
+					untracked = { text = '┆' },
+				},
 				signcolumn = true,
 				numhl = false,
 				linehl = false,
@@ -133,39 +118,28 @@ return {
 				end,
 				desc = 'Undo Stage Hunk',
 			},
-			{
-				'<leader>Go',
-				require('telescope.builtin').git_status,
-				desc = 'Open changed file',
-			},
-			{
-				'<leader>Gb',
-				require('telescope.builtin').git_branches,
-				desc = 'Checkout branch',
-			},
-			{
-				'<leader>Gc',
-				require('telescope.builtin').git_commits,
-				desc = 'Checkout commit',
-			},
-			{
-				'<leader>GC',
-				require('telescope.builtin').git_bcommits,
-				desc = 'Checkout commit(for current file)',
-			},
+			-- {
+			--   "<leader>Go", require("telescope.builtin").git_status,
+			--   desc = "Open changed file"
+			-- },
+			-- {
+			--   "<leader>Gb", require("telescope.builtin").git_branches,
+			--   desc = "Checkout branch"
+			-- },
+			-- {
+			--   "<leader>Gc", require("telescope.builtin").git_commits,
+			--   desc = "Checkout commit"
+			-- },
+			-- {
+			--   "<leader>GC", require("telescope.builtin").git_bcommits,
+			--   desc = "Checkout commit(for current file)"
+			-- },
 			{
 				'<leader>Gd',
 				function()
 					vim.cmd 'Gitsigns diffthis HEAD'
 				end,
 				desc = 'Git Diff HEAD',
-			},
-			{
-				'<leader>GG',
-				function()
-					require('lazygit').lazygit()
-				end,
-				desc = 'LazyGit',
 			},
 		},
 	},
