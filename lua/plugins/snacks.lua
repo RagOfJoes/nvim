@@ -41,6 +41,13 @@ return {
 		picker = {
 			enabled = true,
 			sources = {
+				explorer = {
+					layout = {
+						layout = {
+							position = 'right',
+						},
+					},
+				},
 				files = { hidden = true },
 			},
 		},
