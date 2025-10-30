@@ -1,3 +1,5 @@
-# NVIM Configuration
+# Neovim configuration
 
-My personal neovim configuration
+## Heavily inspired by @adibhanna nvim configuration
+
+Always a WIP.

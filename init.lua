@@ -1,2 +1,8 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+require 'core.mason-path'
+require 'core.lsp'
+require 'core.statusline'
+require 'config.options'
+require 'config.keymaps'
+require 'config.autocmds'
+require 'config.mason-verify'
+require 'core.lazy'
