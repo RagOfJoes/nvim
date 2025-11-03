@@ -35,7 +35,7 @@ vim.opt.breakindent = true -- wrap lines with indent
 vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = 'yes' -- always show the sign column, otherwise it would shift the text each time
-vim.opt.wrap = false -- display lines as one long line
+vim.opt.wrap = true -- display lines as one long line
 vim.opt.scrolloff = 8 -- Makes sure there are always eight lines of context
 vim.opt.sidescrolloff = 8 -- Makes sure there are always eight lines of context
 vim.opt.showcmd = false -- Don't show the command in the last line
@@ -48,6 +48,7 @@ vim.opt.list = true
 vim.opt.listchars = {
 	-- eol = "",
 	extends = '⟩',
+	leadmultispace = '│ ',
 	-- nbsp = "␣",
 	precedes = '⟨',
 	tab = ' ',
@@ -62,7 +63,7 @@ vim.opt.linebreak = true
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
-vim.opt.laststatus = 0 -- Always display the status line
+vim.opt.laststatus = 2 -- Always display the status line
 
 vim.filetype.add {
 	extension = {
