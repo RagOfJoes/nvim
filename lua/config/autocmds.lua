@@ -144,6 +144,35 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
 	pattern = '*',
 })
 
+-- Autofix ESLint issues on save
+vim.api.nvim_create_autocmd('BufWritePost', {
+	group = vim.api.nvim_create_augroup('EslintAutoFix', { clear = true }),
+	pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
+	callback = function()
+		-- use eslint_d if available, otherwise eslint from node_modules/.bin or global
+		local eslint_cmd = vim.fn.executable 'eslint_d' == 1 and 'eslint_d' or 'npx eslint'
+		local file = vim.fn.expand '%:p'
+		-- run eslint --fix synchronously (or use jobstart for async)
+		vim.fn.jobstart(eslint_cmd .. ' --fix ' .. vim.fn.shellescape(file), {
+			on_exit = function(_, code, _)
+				if code == 0 then
+					-- reload buffer to pick up changes made by eslint
+					vim.schedule(function()
+						local view = vim.fn.winsaveview()
+						vim.cmd 'silent! edit' -- reload file
+						vim.fn.winrestview(view)
+					end)
+				else
+					-- non-zero: eslint may have thrown an error; optionally notify
+					vim.schedule(function()
+						vim.notify('eslint --fix exited with code: ' .. tostring(code), vim.log.levels.WARN)
+					end)
+				end
+			end,
+		})
+	end,
+})
+
 -- -- Golang format on save
 -- local goformat_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 -- vim.api.nvim_create_autocmd("BufWritePre", {
