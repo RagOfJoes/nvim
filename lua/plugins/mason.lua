@@ -23,8 +23,8 @@ return {
 				'goimports',
 				-- Note: gofmt comes with Go installation, not managed by Mason
 				'prettier',
-				'black',
-				'isort',
+				-- 'black',
+				-- 'isort',
 
 				-- Linters and diagnostics
 				'golangci-lint',
