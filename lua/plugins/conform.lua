@@ -25,21 +25,21 @@ return {
 			lua = { 'stylua' },
 
 			-- Web technologies
-			astro = { 'prettierd', 'prettier' },
-			javascript = { 'prettierd', 'prettier' },
-			typescript = { 'prettierd', 'prettier' },
-			javascriptreact = { 'prettierd', 'prettier' },
-			typescriptreact = { 'prettierd', 'prettier' },
-			json = { 'prettierd', 'prettier' },
-			jsonc = { 'prettierd', 'prettier' },
-			yaml = { 'prettierd', 'prettier' },
-			markdown = { 'prettierd', 'prettier' },
-			html = { 'prettierd', 'prettier' },
-			css = { 'prettierd', 'prettier' },
-			scss = { 'prettierd', 'prettier' },
+			astro = { 'prettierd' },
+			javascript = { 'prettierd' },
+			typescript = { 'prettierd' },
+			javascriptreact = { 'prettierd' },
+			typescriptreact = { 'prettierd' },
+			json = { 'prettierd' },
+			jsonc = { 'prettierd' },
+			yaml = { 'prettierd' },
+			markdown = { 'prettierd' },
+			html = { 'prettierd' },
+			css = { 'prettierd' },
+			scss = { 'prettierd' },
 
 			-- Python
-			python = { 'isort', 'black' },
+			-- python = { 'isort', 'black' },
 
 			-- Shell
 			sh = { 'shfmt' },
@@ -57,8 +57,8 @@ return {
 			lsp_format = 'fallback',
 		},
 		format_on_save = {
-		    timeout_ms = 1000,
-		    lsp_format = "fallback",
+			timeout_ms = 500,
+			lsp_format = 'fallback',
 		},
 	},
 	init = function()

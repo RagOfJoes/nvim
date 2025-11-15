@@ -5,10 +5,24 @@ return {
 		local lint = require 'lint'
 
 		-- Configure custom linters using Mason-managed tools
-		local mason_bin_dir = vim.fn.stdpath 'data' .. '/mason/bin'
+		-- local mason_bin_dir = vim.fn.stdpath 'data' .. '/mason/bin'
+
+		-- Customize eslint_d
+		local eslint_d = lint.linters.eslint_d
+		eslint_d.settings = {
+			codeAction = {
+				disableRuleComment = {
+					enable = true,
+					location = 'separateLine',
+				},
+				showDocumentation = {
+					enable = true,
+				},
+			},
+		}
 
 		-- Customize golangcilint to ignore exit codes (golangci-lint exits with code 1-3 when issues are found)
-		local golangcilint = require('lint').linters.golangcilint
+		local golangcilint = lint.linters.golangcilint
 		golangcilint.ignore_exitcode = true
 
 		-- Configure linters by filetype (using Mason-managed tools)
@@ -31,7 +45,7 @@ return {
 			zsh = { 'shellcheck' },
 
 			-- You can add more linters here as needed
-			python = { 'flake8', 'mypy' },
+			-- python = { 'flake8', 'mypy' },
 			rust = { 'clippy' },
 		}
 

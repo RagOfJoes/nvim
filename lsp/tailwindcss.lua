@@ -1,6 +1,7 @@
 return {
 	cmd = { 'tailwindcss-language-server', '--stdio' },
 	filetypes = {
+		'astro',
 		'javascript',
 		'javascriptreact',
 		'typescript',

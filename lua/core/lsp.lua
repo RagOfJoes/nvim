@@ -5,6 +5,7 @@
 -- These configs are automatically managed by Mason (see lua/plugins/mason.lua)
 
 local servers = {
+	'astro', -- Astro language server
 	'lua-ls', -- Lua language server
 	'gopls', -- Go language server
 	'zls', -- Zig language server
