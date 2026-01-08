@@ -32,6 +32,7 @@ function M.verify_tools()
 		-- Formatters (Mason-managed)
 		'stylua',
 		'prettier',
+		'prettierd',
 		'goimports',
 		'black',
 		'isort',
