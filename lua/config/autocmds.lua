@@ -145,25 +145,41 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter' }, {
 })
 
 -- Autofix ESLint issues on save
+local function find_eslint_root()
+	local config_files = {
+		'eslint.config.js',
+		'eslint.config.mjs',
+		'eslint.config.cjs',
+		'.eslintrc.js',
+		'.eslintrc.cjs',
+		'.eslintrc.json',
+		'.eslintrc',
+	}
+
+	return vim.fs.dirname(vim.fs.find(config_files, {
+		upward = true,
+		path = vim.api.nvim_buf_get_name(0),
+	})[1])
+end
 vim.api.nvim_create_autocmd('BufWritePost', {
 	group = vim.api.nvim_create_augroup('EslintAutoFix', { clear = true }),
 	pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
 	callback = function()
-		-- use eslint_d if available, otherwise eslint from node_modules/.bin or global
 		local eslint_cmd = vim.fn.executable 'eslint_d' == 1 and 'eslint_d' or 'npx eslint'
 		local file = vim.fn.expand '%:p'
-		-- run eslint --fix synchronously (or use jobstart for async)
-		vim.fn.jobstart(eslint_cmd .. ' --fix ' .. vim.fn.shellescape(file), {
+		local root = find_eslint_root()
+
+		vim.fn.jobstart({ eslint_cmd, '--fix', file }, {
+			cwd = root,
 			on_exit = function(_, code, _)
-				if code == 0 then
-					-- reload buffer to pick up changes made by eslint
+				-- treat 0 and 1 as success
+				if code == 0 or code == 1 then
 					vim.schedule(function()
 						local view = vim.fn.winsaveview()
-						vim.cmd 'silent! edit' -- reload file
+						vim.cmd 'silent! edit'
 						vim.fn.winrestview(view)
 					end)
 				else
-					-- non-zero: eslint may have thrown an error; optionally notify
 					vim.schedule(function()
 						vim.notify('eslint --fix exited with code: ' .. tostring(code), vim.log.levels.WARN)
 					end)
